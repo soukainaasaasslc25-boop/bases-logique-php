@@ -31,9 +31,6 @@
      $check=checkRange($notes);
         if($check)
             return ($notes[0]+ $notes[1]+$notes[2]) / 3;
-        else
-            echo "Please enter number between 1 and 20";
-
 }
 
 
@@ -45,13 +42,24 @@ function getMention($moyn){
     if ($moyn<=14) return 'assez bien ';
     if ($moyn<=16) return 'bieen';
     if ($moyn<=18) return 'tres tres bien ';
-    if ($moyn<=20) return 'congratulation  '.$name."     you are genies 🚀 ";
+    if ($moyn<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
 
 
 }
-$moyn=calculateAVG($notes);
-$mention=getMention($moyn);
-echo"the average is  ".$moyn."<br>";
-echo  "the mention is    ".$mention;
 
 
+function PrintResult($notes){
+     $check=checkRange($notes);
+    if( $check){
+    echo"the average is  <br>";
+    echo calculateAVG($notes)."<br>";
+    echo  "the mention is    <br>";
+    echo getMention(calculateAVG($notes))."<br>";
+    }
+    else
+         echo "Please enter number between 1 and 20  ";
+ 
+
+}
+
+PrintResult($notes);
