@@ -35,14 +35,14 @@
 
 
 
-function getMention($moyn){
+function getMention($AVG){
      $name=$_POST['nom'];
-    if($moyn <10) return 'ratrapage';
-    if ($moyn<=11) return 'passable';
-    if ($moyn<=14) return 'assez bien ';
-    if ($moyn<=16) return 'bieen';
-    if ($moyn<=18) return 'tres tres bien ';
-    if ($moyn<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
+    if($AVG <10) return 'ratrapage';
+    if ($AVG<=11) return 'passable';
+    if ($AVG<=14) return 'assez bien ';
+    if ($AVG<=16) return 'bieen';
+    if ($AVG<=18) return 'tres tres bien ';
+    if ($AVG<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
 
 
 }
