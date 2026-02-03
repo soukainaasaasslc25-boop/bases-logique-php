@@ -40,9 +40,9 @@ function getMention($AVG){
     if($AVG <10) return 'ratrapage';
     if ($AVG<=11) return 'passable';
     if ($AVG<=14) return 'assez bien ';
-    if ($AVG<=16) return 'bieen';
-    if ($AVG<=18) return 'tres tres bien ';
-    if ($AVG<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
+    if ($AVG<=16) return ' tres bien';
+    if ($AVG<=18) return 'excelent ';
+    if ($AVG<=20) return 'congratulation  '.$name."     vous etes genius 🚀 ";
 
 
 }
@@ -51,13 +51,13 @@ function getMention($AVG){
 function PrintResult($notes){
      $check=checkRange($notes);
     if( $check){
-    echo"the average is  <br>";
-    echo calculateAVG($notes)."<br>";
-    echo  "the mention is    <br>";
+    echo"le moyenne est    <br>";
+    echo   round(calculateAVG($notes), 2)."<br>";
+    echo  "la mention est    <br>";
     echo getMention(calculateAVG($notes))."<br>";
     }
     else
-         echo "Please enter number between 1 and 20  ";
+         echo "svp entrer un nombre entre 0 et 20  ";
  
 
 }
