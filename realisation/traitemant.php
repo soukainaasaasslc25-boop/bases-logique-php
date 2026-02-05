@@ -1,13 +1,16 @@
 <?php
 
+
+
 if (isset($_POST["submit"])) {
 
+
     $notes = [
-        "Frontend" => [ $_POST["frontend1"], $_POST["frontend2"] , 5 ],
-        "Backend" => [ $_POST["backend1"], $_POST["backend2"], 5 ],
-        "Entreprenariat" => [ $_POST["entre1"], $_POST["entre2"],"cof"=>2 ],
-        "Anglais" => [ $_POST["anglais1"], $_POST["anglais2"] ,"cof"=>3],
-        "Soft Skills" => [ $_POST["soft1"], $_POST["soft2"] ,"cof"=>3]
+        "Frontend" => [ (float)$_POST["frontend1"], (float)$_POST["frontend2"] ,5 ],
+        "Backend" => [ $_POST["backend1"], $_POST["backend2"],5],
+        "Entreprenariat" => [ $_POST["entre1"], $_POST["entre2"],2],
+        "Anglais" => [ $_POST["anglais1"], $_POST["anglais2"] ,2],
+        "Soft Skills" => [ $_POST["soft1"], $_POST["soft2"] , 3]
     ];
 
    
@@ -26,50 +29,67 @@ if (isset($_POST["submit"])) {
         return true;
     }
 
-    
 
-  function calculateAVG($notes) {
+  function calculateBulletin    ($notes) {
     if (!checkRange($notes)) {
         return "Erreur : Notes hors limites (0-20)";
     }
+     $Sum_Cofficient =0;
+      $SumMoyenne_cofficient = 0;
+    foreach ($notes as $matiere => $notesMatiere){
 
-    $totalPoints = 0;
-    $totalCoeff = 0;
+      $MoyenneDesNots= ($notesMatiere[0]+ $notesMatiere[1])/(count($notesMatiere)-1);
+      $Cofficient = $notesMatiere[count($notesMatiere)-1];
+      $SumMoyenne_cofficient += ($Cofficient * $MoyenneDesNots);
+     
+      $Sum_Cofficient += $notesMatiere[count($notesMatiere)-1];
 
-    foreach ($notes as $matiere => $data) {
-        $moyenneMatiere = ($data[0] + $data[1]) / 2;
-        $totalPoints += ($moyenneMatiere * $data[2]);
-        $totalCoeff += $data[2];
     }
-
-    return $totalPoints / $totalCoeff;
+return  round(($SumMoyenne_cofficient / $Sum_Cofficient),2);
 }
 
 
-function getMention($AVG){
+function getMention($Bull){
      $name=$_POST['nom'];
-    if($AVG <10) return 'ratrapage';
-    if ($AVG<=11) return 'passable';
-    if ($AVG<=14) return 'assez bien ';
-    if ($AVG<=16) return 'bieen';
-    if ($AVG<=18) return 'tres tres bien ';
-    if ($AVG<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
-
+    if($Bull <10) return 'ratrapage';
+    if ($Bull<=11) return 'passable';
+    if ($Bull<=14) return 'assez bien ';
+    if ($Bull<=16) return 'bieen';
+    if ($Bull<=18) return 'tres tres bien ';
+    if ($Bull<=20) return 'congratulation  '.$name."     you are genius 🚀 ";
 
 }
-
-
 
  function PrintResult($notes){
-     echo"the average is  <br>";
-     echo calculateAVG($notes)."<br>";
-     echo  "the mention is    <br>";
-     echo getMention(calculateAVG($notes))."<br>";
-    ;
- 
 
+    $nom=$_POST["nom"];
+  $prenom=$_POST["prenom"];
+   $filier=$_POST["filiere"];
+    $dateN=$_POST["Date"];
+
+    echo "<strong> Le builletin    </strong>  <br>";
+
+    echo"le nom est le prenom d'etudiant est  : ".$nom."  ".$prenom."<br>";
+
+    echo"Né le  : ".$dateN."<br>";
+    echo"Filiére    : ".$filier."<br>";
+
+     echo"the average is  :".calculateBulletin($notes)."<br>";
+     
+     echo  "the mention is    <br>";
+     echo getMention(calculateBulletin($notes))."<br>";
+     if(calculateBulletin($notes)>=10){
+      echo  "Vous   etes   <strong> Admis </strong>  <br>";
+     }
+
+     else{
+      echo  "Vous   etes  <strong > Ajourné  </strong> <br>";
+     }
  }
 
  PrintResult($notes);
+
+ echo "<a href='index.php'>Réinitialiser</a>";
+
 }
 ?>

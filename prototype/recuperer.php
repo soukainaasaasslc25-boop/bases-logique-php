@@ -30,7 +30,7 @@
     {
      $check=checkRange($notes);
         if($check)
-            return ($notes[0]+ $notes[1]+$notes[2]) /3;
+            return ($notes[0]+ $notes[1]+$notes[2]) /count($notes);
 }
 
 
