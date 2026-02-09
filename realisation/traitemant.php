@@ -62,10 +62,10 @@ function getMention($Bull){
 
  function PrintResult($notes){
 
-    $nom=$_POST["nom"];
-  $prenom=$_POST["prenom"];
-   $filier=$_POST["filiere"];
-    $dateN=$_POST["Date"];
+    $nom= $nom = trim($_POST['nom']);
+  $prenom=trim($_POST["prenom"]);
+   $filier=trim($_POST["filiere"]);
+    $dateN=trim($_POST["Date"]);
 
     echo "<strong> Le builletin    </strong>  <br>";
 
